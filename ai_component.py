@@ -28,5 +28,8 @@ class AIComponent(Component):
             # Enter new state
             self._m_current_state.on_enter()
         else:
-            sdl2.SDL_Log("AIState not in dictionary!")
+            sdl2.SDL_Log("AIState, " + self.get_name() + " not in dictionary")
             self._m_current_state = None
+
+    def register_state(self, state: AIState) -> None:
+        self._m_state_map.update({state.get_name(): state})
