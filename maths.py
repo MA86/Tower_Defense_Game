@@ -54,6 +54,10 @@ def tan(angle: float) -> float:
     return math.tan(angle)
 
 
+def atan2(y: float, x: float) -> float:
+    return math.atan2(y, x)
+
+
 ### Math classes ###
 
 
@@ -81,7 +85,11 @@ class Vector2D:
             raise NotImplementedError()
 
     # Alternative to length()
+
     def length_sq(self) -> float:
         return (self.x * self.x + self.y * self.y)
+
+    def length(self) -> float:
+        return math.sqrt(self.length_sq())
 
     # TODO add vector operations
