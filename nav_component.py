@@ -4,7 +4,9 @@ import maths
 
 
 class NavComponent(MoveComponent):
-    """ Rotates Actor to face a point (the next node). """
+    """ 
+    Using pathfinder's output, moves Actor from one node to the next node. 
+    """
 
     def __init__(self, owner: Actor, update_order: int = 10) -> None:
         super().__init__(owner, update_order)
@@ -24,6 +26,7 @@ class NavComponent(MoveComponent):
         # Otherwise, continue moving forward
         super().update(dt)
 
+    # Recieves path (A* output, which is a chain of tiles)
     def start_path(self, start: Tile) -> None:
         self._m_next_node: Tile = start.get_parent()
         self.turn_to(self._m_next_node.get_position())

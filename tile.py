@@ -12,6 +12,8 @@ class TileState(Enum):
 
 
 class Tile(Actor):
+    """ Representation of a node for graph. """
+
     def __init__(self, game: Game) -> None:
         super().__init__(game)
 
@@ -36,19 +38,19 @@ class Tile(Actor):
 
     def _update_texture(self) -> None:
         if self._m_tile_state == TileState.eSTART:
-            text = "assets/tile_tan.png"
+            text = b"assets/tile_tan.png"
         elif self._m_tile_state == TileState.eBASE:
-            text = "assets/tile_green.png"
+            text = b"assets/tile_green.png"
         elif self._m_tile_state == TileState.ePATH:
             if self._m_selected:
-                text = "assets/tile_grey_selected.png"
+                text = b"assets/tile_grey_selected.png"
             else:
-                text = "assets/tile_grey.png"
+                text = b"assets/tile_grey.png"
         else:
             if self._m_selected:
-                text = "assets/tile_brown_selected.png"
+                text = b"assets/tile_brown_selected.png"
             else:
-                text = "assets/tile_brown.png"
+                text = b"assets/tile_brown.png"
 
         self._m_sprite.set_texture(self.get_game().get_texture(text))
 
