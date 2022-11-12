@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import List         # For hinting
 from actor import Actor
 from tile import Tile, TileState
+from tower import Tower
 from maths import Vector2D
 
 
@@ -168,3 +169,24 @@ class Grid(Actor):
         while t != self.get_end_tile():
             t.set_tile_state(TileState.ePATH)
             t = t._m_parent
+
+    def build_tower(self) -> None:
+        if self._m_selected_tile and self._m_selected_tile._m_blocked == False:
+            self._m_selected_tile._m_blocked = True
+            if self.find_path(self.get_end_tile(), self.get_start_tile()):
+                t = Tower(self.get_game())
+                t.set_position(self._m_selected_tile.get_position())
+            else:
+                # Tower would block the path, don't allow build
+                self._m_selected_tile._m_blocked = False
+                self.find_path(self.get_end_tile(), self.get_start_tile())
+            self._update_path_tiles(self.get_start_tile())
+
+    def update_actor(self, dt: float) -> None:
+        return super().update_actor(dt)
+
+        # Is it time to spawn new enemy?
+        self._m_next_enemy_time -= dt
+        if self._m_next_enemy_time <= 0.0:
+            Enemy(self.get_game())
+            self._m_next_enemy_time += self._m_enemy_time
