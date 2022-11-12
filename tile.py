@@ -12,12 +12,12 @@ class TileState(Enum):
 
 
 class Tile(Actor):
-    """ Representation of a node for graph. """
+    """ Representation of a node for building a graph. """
 
     def __init__(self, game: Game) -> None:
         super().__init__(game)
 
-        # For A* pathfinding
+        # For building graph and pathfinding algorithm
         self._m_adjacent: list = []
         self._m_parent: Tile = None
         self._f: float = 0.0
@@ -53,6 +53,10 @@ class Tile(Actor):
                 text = b"assets/tile_brown.png"
 
         self._m_sprite.set_texture(self.get_game().get_texture(text))
+
+    def toggle_select(self) -> None:
+        self._m_selected = not self._m_selected
+        self._update_texture()
 
     def get_tile_state(self) -> TileState:
         return self._m_tile_state

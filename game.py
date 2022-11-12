@@ -79,18 +79,32 @@ class Game:
 
     def _process_input(self) -> None:
         event = sdl2.SDL_Event()    # Empty object
-        # Get and check events-queue
+        # Get and check events-queue for Game
         while sdl2.SDL_PollEvent(event):
             if event.type == sdl2.SDL_QUIT:
                 self._m_running = False
+                break
 
-        # Get states-queue
+        # Get key states-queue
         keyb_state = sdl2.SDL_GetKeyboardState(None)
 
-        # Check states-queue for Game
+        # Check key states-queue for Game
         if keyb_state[sdl2.SDL_SCANCODE_ESCAPE]:
             self._m_running = False
-        # Check states-queue for Actors
+
+        # Check key states-queue for Grid
+        if keyb_state[sdl2.SDL_SCANCODE_B]:
+            # TODO build tower
+            pass
+        # Check mouse states-queue for Grid
+        x = ctypes.c_int(0)
+        y = ctypes.c_int(0)
+        mousebut_state = sdl2.SDL_GetMouseState(
+            ctypes.byref(x), ctypes.byref(y))
+        if (mousebut_state & sdl2.SDL_BUTTON_LMASK) != 0:
+            self._m_grid.process_click(x.value, y.value)
+
+        # Check key states-queue for Actors
         self._m_updating_actors = True
         for actor in self._m_actors:
             actor.input(keyb_state)
