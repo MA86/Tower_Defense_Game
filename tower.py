@@ -2,7 +2,9 @@ from __future__ import annotations
 from actor import Actor
 from move_component import MoveComponent
 from sprite_component import SpriteComponent
-import maths
+#from enemy import Enemy
+#from bullet import Bullet
+#import maths
 
 
 class Tower(Actor):
@@ -14,15 +16,17 @@ class Tower(Actor):
         self._m_attack_range: float = 100.0
 
         # Components
-        self._m_move: MoveComponent = MoveComponent(self)
-
         sc: SpriteComponent = SpriteComponent(self, 200)
         sc.set_texture(game.get_texture(b"assets/tower.png"))
+        #self._m_move: MoveComponent = MoveComponent(self)
+        # self._m_move.set_forward_speed(15.0)
 
         self._m_next_attack_time = self._m_attack_time
 
+
+"""
     def update_actor(self, dt: float) -> None:
-        return super().update_actor(dt)
+        super().update_actor(dt)
 
         self._m_next_attack_time -= dt
         if self._m_next_attack_time <= 0.0:
@@ -38,4 +42,4 @@ class Tower(Actor):
                     b: Bullet = Bullet(self.get_game())
                     b.set_position(self.get_position())
                     b.set_rotation(self.get_rotation())
-            self._m_next_attack_time += self._m_attack_time
+            self._m_next_attack_time += self._m_attack_time """

@@ -5,6 +5,7 @@ import sdl2.sdlimage as sdlimage
 
 from actor import Actor, State
 from grid import Grid
+from tower import Tower
 import ctypes
 
 
@@ -24,7 +25,10 @@ class Game:
         self._m_running: bool = True
         self._m_time_then: float = 0.0
 
+        # Game-specific
+        self._m_enemies: Enemy = []
         self._m_grid: Grid = None
+        self._m_next_enemy = None  # TODO
 
     def initialize(self) -> bool:
         # Initialize SDL
@@ -94,8 +98,8 @@ class Game:
 
         # Check key states-queue for Grid
         if keyb_state[sdl2.SDL_SCANCODE_B]:
-            # TODO build tower
-            pass
+            self._m_grid.build_tower()
+
         # Check mouse states-queue for Grid
         x = ctypes.c_int(0)
         y = ctypes.c_int(0)
@@ -208,10 +212,19 @@ class Game:
         # Add based on draw order
         index = 0
         for i, c in enumerate(self._m_sprites):
+            index = i
             if sprite.get_draw_order() < c.get_draw_order():
-                index = i
                 break
         self._m_sprites.insert(index, sprite)
 
     def remove_sprite(self, sprite: SpriteComponent) -> None:
         self._m_sprites.remove(sprite)
+
+    def get_grid(self) -> Grid:
+        return self._m_grid
+
+    def get_enemies(self) -> list:
+        return self._m_enemies
+
+    def get_nearest_enemy(self, pos: Vector2D):
+        raise NotImplementedError()
