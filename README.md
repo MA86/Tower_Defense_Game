@@ -6,7 +6,9 @@ This project is part of a book that I'm currently reading (see below for name of
 
 ## Technologies Used
 
-Python, and SDL2 (Simple Directmedia Layer) which is a low-level 2D/3D programming library similar to OpenGL. Additionally, for the organization of classes, a technique that mixes *hierarchy game object model* and *composition game object model* is applied. This prototype also implements the A* pathfinding algorithm; the enemy follows the path while towers shoot at them.
+Python, and SDL2 (Simple Directmedia Layer) which is a low-level 2D/3D programming library similar to OpenGL. Additionally, for the organization of classes, a technique that mixes *hierarchy game object model* and *composition game object model* is applied. 
+
+This prototype also implements the A* pathfinding algorithm; the enemy follows the path while towers shoot at them.
 
 New classes added for this project:
 
