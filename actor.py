@@ -35,7 +35,7 @@ class Actor:
 
     def delete(self) -> None:
         # If container gone -> contained gone! [Composition]
-        self._m_game.remove_actor(self)
+        self.get_game().remove_actor(self)
         for c in list(self._m_components):
             c.delete()
 

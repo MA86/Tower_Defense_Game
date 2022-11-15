@@ -3,7 +3,7 @@ from typing import List         # For hinting
 from actor import Actor
 from tile import Tile, TileState
 from tower import Tower
-#from enemy import Enemy
+from enemy import Enemy
 from maths import Vector2D
 
 
@@ -28,7 +28,7 @@ class Grid(Actor):
         self._m_tile_size: float = 64.0
 
         self._m_selected_tile: Tile = None
-        self._m_enemy_time: float = 1.5         # Time between enem.
+        self._m_enemy_time: float = 3.0         # Time between enem.
         self._m_next_enemy_time: float = None   # Time left until next enem.
 
         # BUILD GRAPH: Start
@@ -72,8 +72,7 @@ class Grid(Actor):
         # Set state of each tile in the path to ePATH
         self._update_path_tiles(self.get_start_tile())
 
-        # TODO enemy
-        # self._m_next_enemy_time = self._m_enemy_time
+        self._m_next_enemy_time = self._m_enemy_time
 
     def find_path(self, start: Tile, goal: Tile) -> bool:
         for r in range(self._m_num_rows):
@@ -185,8 +184,6 @@ class Grid(Actor):
                 self.find_path(self.get_end_tile(), self.get_start_tile())
             self._update_path_tiles(self.get_start_tile())
 
-
-"""
     def update_actor(self, dt: float) -> None:
         super().update_actor(dt)
 
@@ -195,4 +192,3 @@ class Grid(Actor):
         if self._m_next_enemy_time <= 0.0:
             Enemy(self.get_game())
             self._m_next_enemy_time += self._m_enemy_time
-"""

@@ -23,6 +23,11 @@ class NavComponent(MoveComponent):
                 self._m_next_node: Tile = self._m_next_node.get_parent()
                 self.turn_to(self._m_next_node.get_position())
 
+        # [DELETE] temp fix for physics
+        # self._m_velocity = maths.Vector2D(
+         #   self._m_owner.get_forward().x * 3000*dt, self._m_owner.get_forward().y*3000*dt)
+        # [DELETE] temp fix for physics
+
         # Otherwise, continue moving forward
         super().update(dt)
 

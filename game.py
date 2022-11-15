@@ -227,4 +227,16 @@ class Game:
         return self._m_enemies
 
     def get_nearest_enemy(self, pos: Vector2D):
-        raise NotImplementedError()
+        best: Enemy = None
+        if len(self._m_enemies) > 0:
+            best: Enemy = self._m_enemies[0]
+            # Save distance of first enemy and test if others are closer
+            best_dist_sq: float = (
+                pos - self._m_enemies[0].get_position()).length_sq()
+            for i in range(len(self._m_enemies)):
+                new_dist_sq: float = (
+                    (pos - self._m_enemies[i].get_position()).length_sq())
+                if new_dist_sq < best_dist_sq:
+                    best_dist_sq = new_dist_sq
+                    best = self._m_enemies[i]
+        return best
